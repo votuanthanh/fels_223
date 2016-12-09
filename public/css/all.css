@@ -9,12 +9,51 @@
     margin: 0 auto;
 }
 
-.wrapper-information-user > ul {
+.wrapper-information-user > ul,
+.section-history ul {
     list-style: none;
     padding: 0;
     font-style: 12px !important;
 }
 
-ul.action_admin_with_user {
+ul.action_admin_with_user,
+.section-history ul {
     list-style: none;
+}
+.section-history > p {
+    font-size: 16px;
+    font-weight: bold;
+}
+.section-history .label {
+    font-size: 12px;
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+.secction-category,
+.section-words {
+    padding-bottom: 15px;
+    border-bottom: 1px dotted #000;
+}
+
+.secction-category:last-of-type,
+.section-words:last-of-type {
+    border: none;
+}
+
+.secction-category .col-md-2 > a {
+    margin-top: 25px;
+    margin-left: 15px;
+}
+
+.section-words .section-answer .radio > label {
+    padding-right: 20px;
+}
+
+.section-words .section-answer .radio > label.is-correct {
+    background: url(../images/tye-tick.png) right center no-repeat;
+}
+
+.section-words .section-answer .radio > label.not-correct {
+    background: url(../images/tye-cross.png) right center no-repeat;
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Result extends Model
 {
-    protected $fillable = ['lesson_id', 'answer_id', 'word_id'];
+    protected $fillable = ['lesson_id', 'answer_id', 'word_id', 'category_id'];
 
     public function lesson()
     {

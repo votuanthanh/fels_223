@@ -6,4 +6,7 @@ return [
         'paginate' => 10,
         'default_password_seeder' => '123123',
     ],
+    'answer' => [
+        'is_correct_answer' => 1,
+    ],
 ];

@@ -15,6 +15,7 @@ class LessonTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
+
         $startCategory = Category::orderby('id')->first();
         $endCategory = Category::orderby('id', 'desc')->first();
         $startUser = User::orderby('id')->first();

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+
 use App\Model\Word;
 use App\Model\Lesson;
 use App\Model\Answer;
@@ -33,6 +34,7 @@ class ResultTableSeeder extends Seeder
                     ->pluck('id')
                     ->all();
                 $result->word_id = $word->id;
+                $result->category_id = $word->category_id;
                 $result->answer_id = $idAnswerArray[array_rand($idAnswerArray, 1)];
                 $result->save();
             }

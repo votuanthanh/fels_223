@@ -14,7 +14,7 @@ class CategoryTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        for ($i = 0; $i < 4; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             Category::create([
                 'name' => $faker->word,
                 'description' => $faker->catchPhrase,

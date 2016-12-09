@@ -12,12 +12,12 @@
                 <div class="panel-heading">{{ trans('settings.button.login') }}</div>
                 <div class="panel-body">
                     {!! Form::open([
-                        'action' => 'Auth\LoginController@login', 
-                        'method' => 'POST', 
-                        'class' => 'form-horizontal', 
+                        'action' => 'Auth\LoginController@login',
+                        'method' => 'POST',
+                        'class' => 'form-horizontal',
                         'role'=>'form',
                     ]) !!}
-                    
+
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">
                                 {{ trans('settings.label.email_address') }}
@@ -25,8 +25,8 @@
 
                             <div class="col-md-6">
                                 {!! Form::email('email', null, [
-                                    'class' => 'form-control', 
-                                    'id' => 'email', 
+                                    'class' => 'form-control',
+                                    'id' => 'email',
                                     'autofocus',
                                 ]) !!}
                                 @if ($errors->has('email'))
@@ -44,8 +44,8 @@
 
                             <div class="col-md-6">
                                 {!! Form::password('password', [
-                                    'class' => 'form-control', 
-                                    'id' => 'password', 
+                                    'class' => 'form-control',
+                                    'id' => 'password',
                                     'required',
                                 ]) !!}
                                 @if ($errors->has('password'))
@@ -87,7 +87,7 @@
                             <div class="col col-md-4">
                                 <a class="btn" href="#"><i class="fa fa-twitter" aria-hidden="true"></i>{{ trans('settings.text.social.twister') }}</a>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                     <!--END: wrapper-social -->
                 </div>

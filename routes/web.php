@@ -16,7 +16,11 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
+    Route::get('category', 'Web\CategoryController@index');
+    Route::get('lesson/category/{id}', 'Web\LessonController@index');
+    Route::post('result', 'Web\ResultController@store');
+});
 Route::get('/home', 'HomeController@index');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {

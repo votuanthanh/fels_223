@@ -8,7 +8,6 @@ use Input;
 
 class UserRepository extends BaseRepository
 {
-
     public function __construct(User $user)
     {
         $this->model = $user;
@@ -49,5 +48,15 @@ class UserRepository extends BaseRepository
         }
 
         return $fileName;
+    }
+
+    public function getUserFollowing()
+    {
+        return $this->model->following()->get();
+    }
+
+    public function getUserFollowers()
+    {
+        return $this->model->followers()->get();
     }
 }

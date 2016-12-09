@@ -23,4 +23,14 @@ class Lesson extends Model
     {
         return $this->hasMany(Result::class);
     }
+
+    public function answers()
+    {
+        return $this->belongsToMany(Answer::class, 'results');
+    }
+
+    public function words()
+    {
+        return $this->belongsToMany(Word::class, 'results');
+    }
 }

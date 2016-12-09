@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Hash;
+use App\Model\Lesson;
+use App\Model\Category;
 
 class User extends Authenticatable
 {
@@ -35,7 +37,7 @@ class User extends Authenticatable
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'lessons', 'user_id', 'category_id');
+        return $this->belongsToMany(Category::class, 'lessons', 'user_id', 'category_id')->withTimestamps();
     }
 
     public function lessons()
@@ -56,5 +58,15 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
+    }
+
+    public function following()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'following_id');
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'following_id', 'follower_id');
     }
 }

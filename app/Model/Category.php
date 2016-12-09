@@ -20,4 +20,9 @@ class Category extends Model
     {
         return $this->hasMany(Word::class);
     }
+
+    public function answers()
+    {
+        return $this->belongsToMany(Answer::class, 'results');
+    }
 }

@@ -52,7 +52,7 @@
                             </ul>
                         @elseif (auth()->user())
                             <ul class="nav navbar-nav menu-header">
-                                <li><a href="#">{{ trans('settings.text.list_categories') }}</a></li>
+                                <li><a href="{{ action('Web\CategoryController@index') }}">{{ trans('settings.text.list_categories') }}</a></li>
                                 <li><a href="#">{{ trans('settings.text.list_words') }}</a></li>
                                 <li><a href="#">{{ trans('settings.text.list_users') }}</a></li>
                             </ul>
@@ -82,6 +82,7 @@
                                                 'role' => 'form',
                                                 'id' => 'form-logout',
                                             ]) !!}
+                                            {!! Form::close() !!}
                                         </a>
                                     </li>
                                 </ul>
