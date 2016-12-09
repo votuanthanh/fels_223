@@ -12,7 +12,7 @@
 
     <!-- Fonts -->
     {{ Html::style('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css', [
-        'crossorigin' => 'anonymous', 
+        'crossorigin' => 'anonymous',
         'integrity' => 'sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+',
     ]) }}
 
@@ -43,12 +43,20 @@
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    @if (auth()->user())
-                        <ul class="nav navbar-nav menu-header">
-                            <li><a href="#">{{ trans('settings.text.list_categories') }}</a></li>
-                            <li><a href="#">{{ trans('settings.text.list_words') }}</a></li>
-                            <li><a href="#">{{ trans('settings.text.list_users') }}</a></li>
-                        </ul>
+                    @if(auth()->check())
+                        @if (auth()->user()->isAdmin())
+                            <ul class="nav navbar-nav menu-header">
+                                <li><a href="#">{{ trans('settings.text.manage_categories') }}</a></li>
+                                <li><a href="#">{{ trans('settings.text.manage_words') }}</a></li>
+                                <li><a href="{{ action('Admin\UserController@index') }}">{{ trans('settings.text.manage_users') }}</a></li>
+                            </ul>
+                        @elseif (auth()->user())
+                            <ul class="nav navbar-nav menu-header">
+                                <li><a href="#">{{ trans('settings.text.list_categories') }}</a></li>
+                                <li><a href="#">{{ trans('settings.text.list_words') }}</a></li>
+                                <li><a href="#">{{ trans('settings.text.list_users') }}</a></li>
+                            </ul>
+                        @endif
                     @endif
                     <!-- Left Side Of Navbar -->
 

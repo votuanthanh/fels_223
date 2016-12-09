@@ -2,7 +2,7 @@
     background-color: #fff;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
-    border-radius: 4px; 
+    border-radius: 4px;
 }
 
 .wrapper-information-user img {
@@ -13,4 +13,8 @@
     list-style: none;
     padding: 0;
     font-style: 12px !important;
+}
+
+ul.action_admin_with_user {
+    list-style: none;
 }

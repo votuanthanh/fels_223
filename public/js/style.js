@@ -3,4 +3,9 @@ $(document).ready(function() {
 		event.preventDefault();
 		$("#form-logout").submit();
 	});
+    $('#delete-user').on('click', function(event) {
+        event.preventDefault();
+        $("#form-delete-user").submit();
+    });
+
 });

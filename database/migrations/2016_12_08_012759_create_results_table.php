@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateResultsTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -17,7 +18,7 @@ class CreateResultsTable extends Migration
             $table->increments('id');
             $table->integer('lesson_id')->unsigned()->index();
             $table->integer('answer_id')->unsigned()->index();
-            $table->integer('words_id')->unsigned()->index();
+            $table->integer('word_id')->unsigned()->index();
             $table->timestamps();
         });
     }
