@@ -41,7 +41,7 @@ class HomeController extends BaseController
      */
     public function index()
     {
-        $this->dataView['count_word_learned'] = $this->wordRepository->getLeanredWordWithAllCategory();
+        $this->dataView['count_word_learned'] = $this->wordRepository->getLearnedWordWithAllCategory();
         $this->dataView['count_categories_learned'] = $this->categoryRepository->getCountCategoriesOfLearned();
         $this->dataView['following'] = $this->userRepository->getUserFollowing();
         $this->dataView['followers'] = $this->userRepository->getUserFollowers();

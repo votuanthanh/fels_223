@@ -52,11 +52,11 @@ class UserRepository extends BaseRepository
 
     public function getUserFollowing()
     {
-        return $this->model->following()->get();
+        return $this->getCurrentUser()->following()->get();
     }
 
     public function getUserFollowers()
     {
-        return $this->model->followers()->get();
+        return $this->getCurrentUser()->followers()->get();
     }
 }

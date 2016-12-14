@@ -31,6 +31,7 @@ class LessonRepository extends BaseRepository
             }
             $data[$indexTimeFormat][] = $lesson;
         }
+
         return $data;
     }
 

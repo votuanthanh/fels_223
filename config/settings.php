@@ -9,4 +9,9 @@ return [
     'answer' => [
         'is_correct_answer' => 1,
     ],
+    'filter' => [
+        'all' => 'all',
+        'no_learned' => 'no learned',
+        'learned' => 'learned',
+    ],
 ];

@@ -57,3 +57,35 @@ ul.action_admin_with_user,
 .section-words .section-answer .radio > label.not-correct {
     background: url(../images/tye-cross.png) right center no-repeat;
 }
+
+.group-radio .checkbox-inline {
+    margin-top: 8px;
+    margin-left: 10px;
+}
+
+.word-list {
+    margin-top: 10px;
+}
+
+.word-list .section-filter-words .word-show {
+    font-size: 20px;
+    color: #22558a;
+    font-weight: 500;
+    margin: 0;
+}
+
+.word-list .section-filter-words .answer-show {
+    color: #636b6f;
+    font-style: italic;
+    font-size: 15px;
+}
+
+.word-list .section-filter-words li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.section-alpha h1 {
+    margin-bottom: 0;
+    border-bottom: 1px solid #787878;
+}

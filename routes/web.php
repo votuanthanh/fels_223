@@ -20,6 +20,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
     Route::get('category', 'Web\CategoryController@index');
     Route::get('lesson/category/{id}', 'Web\LessonController@index');
     Route::post('result', 'Web\ResultController@store');
+    Route::get('filter-word', 'Web\FilterController@filterWords');
+    Route::post('filter-word', 'Web\FilterController@filterWords');
 });
 Route::get('/home', 'HomeController@index');
 

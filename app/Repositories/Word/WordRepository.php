@@ -18,28 +18,75 @@ class WordRepository extends BaseRepository
         $this->model = $word;
     }
 
-    public function getLeanredWordWithAllCategory()
+    public function getLearnedWordWithAllCategory()
     {
         $listIdWordLearned = $this->listIdWordLearned();
-        return $this->model->whereIn('id', $listIdWordLearned)->get();
+        return $this->model->whereIn('id', $listIdWordLearned)
+            ->with('answers')
+            ->orderBy('content', 'asc')
+            ->get();
     }
 
-    public function getLeanredNotWordWithAllCategory()
+    public function getWordWithCategoryFollowAlpha($collectionWord)
     {
-        $listIdWordLearned = $this->listIdWordLearned();
-        return $this->model->whereNotIn('id', $listIdWordLearned)->get();
+        $data = [];
+        if ($collectionWord->isEmpty()) {
+            return $data;
+        }
+
+        foreach ($collectionWord as $word) {
+            $firstCharacter = strtolower($word->content[0]);
+
+            if (!isset($data[$firstCharacter])) {
+                $data[$firstCharacter] = [];
+            }
+            $data[$firstCharacter][] = $word;
+        }
+
+        return $data;
     }
 
-    public function getLeanredNotWordWithCategory($idCategory)
+    public function getLearnedNotWordWithAllCategory()
     {
         $listIdWordLearned = $this->listIdWordLearned();
-            return $this->model
-                ->whereNotIn('id', $listIdWordLearned)
-                ->whereCategoryId($idCategory)
-                ->inRandomOrder()
-                ->with('answers')
-                ->take(config('settings.limit_words_random'))
-                ->get();
+        return $this->model->whereNotIn('id', $listIdWordLearned)
+            ->with('answers')
+            ->orderBy('content', 'asc')
+            ->get();
+    }
+
+    public function getLearnedNotWordWithCategoryHasTake($idCategory)
+    {
+        $listIdWordLearned = $this->listIdWordLearned();
+        return $this->model
+            ->whereNotIn('id', $listIdWordLearned)
+            ->whereCategoryId($idCategory)
+            ->inRandomOrder()
+            ->with('answers')
+            ->take(config('settings.limit_words_random'))
+            ->get();
+    }
+
+    public function getLearnedWordsWithCategory($idCategory)
+    {
+        $listIdWordLearned = $this->listIdWordLearned();
+        return $this->model
+            ->whereIn('id', $listIdWordLearned)
+            ->whereCategoryId($idCategory)
+            ->with('answers')
+            ->orderBy('content', 'asc')
+            ->get();
+    }
+
+    public function getLearnedNotWordWithCategory($idCategory)
+    {
+        $listIdWordLearned = $this->listIdWordLearned();
+        return $this->model
+            ->whereNotIn('id', $listIdWordLearned)
+            ->whereCategoryId($idCategory)
+            ->with('answers')
+            ->orderBy('content', 'asc')
+            ->get();
     }
 
     public function listIdWordLearned()
