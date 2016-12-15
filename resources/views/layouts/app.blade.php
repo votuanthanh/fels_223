@@ -54,7 +54,7 @@
                             <ul class="nav navbar-nav menu-header">
                                 <li><a href="{{ action('Web\CategoryController@index') }}">{{ trans('settings.text.list_categories') }}</a></li>
                                 <li><a href="{{ action('Web\FilterController@filterWords') }}">{{ trans('settings.text.list_words') }}</a></li>
-                                <li><a href="#">{{ trans('settings.text.list_users') }}</a></li>
+                                <li><a href="{{ action('Web\UserController@index') }}">{{ trans('settings.text.list_users') }}</a></li>
                             </ul>
                         @endif
                     @endif

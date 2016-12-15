@@ -89,3 +89,42 @@ ul.action_admin_with_user,
     margin-bottom: 0;
     border-bottom: 1px solid #787878;
 }
+
+.profile-user {
+    overflow: auto;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.profile-user > img {
+    max-width: 130px;
+    float: left;
+}
+
+.profile-user .info-user {
+    float: left;
+    overflow: hidden;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.profile-user .info-user > h3 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    f
+}
+
+.profile-user .info-user ul.info-detail {
+    list-style: none;
+    padding: 0;
+}
+
+.profile-user .info-user > .btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.loading {
+    display: none;
+}

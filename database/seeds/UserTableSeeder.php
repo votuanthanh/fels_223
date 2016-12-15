@@ -15,14 +15,14 @@ class UserTableSeeder extends Seeder
         $faker = Faker\Factory::create();
 
         User::create([
-            'email' => 'admin@gmail.com',
+            'email' => $faker->email,
             'name' => 'Admin',
             'password' => config('settings.user.default_password_seeder'),
             'role' => 1,
             'avatar' => 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png',
         ]);
 
-        for ($i = 0; $i < 4; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             User::create([
                 'email' => $faker->email,
                 'name' => $faker->name,

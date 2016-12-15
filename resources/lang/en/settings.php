@@ -63,6 +63,11 @@ return [
             'avatar_user' => 'Avatar',
             'name_user' => 'Name',
             'action' => 'Action',
+            'list_users' => 'List Users',
+            'count_following_user' => ':number Following Users',
+            'count_followers' => ':number Followers',
+            'follow' => 'Follow',
+            'unfollow' => 'Unfollow',
         ],
         'social' => [
             'google' => 'Google',

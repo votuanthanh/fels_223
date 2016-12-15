@@ -22,6 +22,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
     Route::post('result', 'Web\ResultController@store');
     Route::get('filter-word', 'Web\FilterController@filterWords');
     Route::post('filter-word', 'Web\FilterController@filterWords');
+    Route::get('list-user', 'Web\UserController@index');
+    Route::get('ajax-relationship-user/{id}', 'Web\UserController@ajaxRelationshipUser');
 });
 Route::get('/home', 'HomeController@index');
 

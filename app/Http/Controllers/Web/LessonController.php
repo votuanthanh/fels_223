@@ -34,7 +34,6 @@ class LessonController extends BaseController
     {
         $this->dataView['idCategory'] = $idCategory;
         $this->dataView['words'] = $this->wordRepository->getLearnedNotWordWithCategoryHasTake($idCategory);
-
         return view('web.lesson.index', $this->dataView);
     }
 }

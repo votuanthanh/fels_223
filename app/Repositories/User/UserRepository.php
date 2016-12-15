@@ -59,4 +59,36 @@ class UserRepository extends BaseRepository
     {
         return $this->getCurrentUser()->followers()->get();
     }
+
+    public function getUsersInPage($page, $perPage)
+    {
+        if (!$page || !$perPage) {
+            return [];
+        }
+
+        return $this->model->newQuery()
+            ->where('role', '<>', config('settings.user.is_admin'))
+            ->where('id', '<>', $this->getCurrentUser()->id)
+            ->get()
+            ->load('following', 'followers')
+            ->forPage($page, $perPage);
+    }
+
+    public function hanleRelationshipBetweenUser($idUser)
+    {
+        if (!$idUser) {
+            return false;
+        }
+        $userCurrent = $this->getCurrentUser();
+        $listUserFollowing = $userCurrent->following();
+
+        if ($listUserFollowing->get()->contains('id', $idUser)) {
+            $listUserFollowing->detach($idUser);
+            $option = config('settings.action.remove');
+        } else {
+            $listUserFollowing->attach($idUser);
+            $option = config('settings.action.add');
+        }
+        return $option;
+    }
 }
