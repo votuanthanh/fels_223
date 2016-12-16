@@ -69,4 +69,23 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class, 'followers', 'following_id', 'follower_id')->withTimestamps();
     }
+
+    public function avatarPath()
+    {
+        return preg_match('#^(http)|(https).*$#', $this->avatar)
+                ? $this->avatar
+                : asset('uploads/avatar/' . $this->avatar);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($user) {
+            //set password for user sign up social network
+            if (!$user->password) {
+                $user->password = config('settings.user.default_password_seeder');
+            }
+            $user->role = config('settings.user.member');
+        });
+    }
 }

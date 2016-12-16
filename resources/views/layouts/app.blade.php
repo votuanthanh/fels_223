@@ -72,7 +72,11 @@
                                     {{ auth()->user()->name }}<span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">{{ trans('settings.text.edit_profile') }}</a></li>
+                                    <li>
+                                        <a href="{{ action('Web\UserController@edit', ['id' => auth()->user()->id]) }}">
+                                            {{ trans('settings.text.edit_profile') }}
+                                        </a>
+                                    </li>
                                     <li>
                                         <a id="logout-submit" href="#">
                                             {{ trans('settings.text.logout') }}

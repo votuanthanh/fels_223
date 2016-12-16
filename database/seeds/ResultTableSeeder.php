@@ -23,7 +23,7 @@ class ResultTableSeeder extends Seeder
         foreach ($lessons as $lesson) {
             $wordRand = Word::inRandomOrder()
                 ->whereCategoryId($idCategorArray[array_rand($idCategorArray, 1)])
-                ->take(5)
+                ->take(20)
                 ->get();
 
             foreach ($wordRand as $word) {

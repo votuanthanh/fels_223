@@ -4,7 +4,9 @@ namespace App\Repositories\User;
 use Auth;
 use App\User;
 use App\Repositories\BaseRepository;
-use Input;
+use Illuminate\Support\Facades\Input;
+use Exception;
+use File;
 
 class UserRepository extends BaseRepository
 {
@@ -13,22 +15,45 @@ class UserRepository extends BaseRepository
         $this->model = $user;
     }
 
+    public function getUserWithEmail($providerUser)
+    {
+        return $this->model->whereEmail($providerUser->getEmail())->first();
+    }
+
+    public function createSocial($inputs)
+    {
+        return $this->model->create($inputs);
+    }
+
+    public function create($request)
+    {
+        $fileName = isset($request['avatar'])
+            ? $this->uploadAvatar()
+            : config('settings.user.avatar_default');
+
+        $user = [
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'avatar' => $fileName,
+            'password' => $request['password'],
+        ];
+
+        $createUser = $this->model->create($user);
+
+        if (!$createUser) {
+            throw new Exception('message.create_error');
+        }
+
+        return $createUser;
+    }
+
     public function update($inputs, $id)
     {
         try {
             $currentUser = Auth::user();
-            if (isset($request['password'])) {
-                $inputs['password'] = $inputs['password'];
-            } else {
-                $inputs['password'] = $currentUser->password;
-            }
-
+            $inputs['password'] = isset($request['password']) ? $inputs['password'] : $currentUser->password;
             $oldImage = $currentUser->avatar;
-
-            if (isset($inputs['avatar'])) {
-                $inputs['avatar'] = $this->uploadAvatar($oldImage);
-            }
-
+            $inputs['avatar'] = isset($inputs['avatar']) ? $this->uploadAvatar($oldImage) : $oldImage;
             $data = $this->model->where('id', $id)->update($inputs);
         } catch (Exception $e) {
             return view('user.home')->withError(trans('message.update_error'));
@@ -37,14 +62,15 @@ class UserRepository extends BaseRepository
         return $data;
     }
 
-    public function uploadAvatar($oldImage)
+    public function uploadAvatar($oldImage = null)
     {
         $fileAvatar = Input::file('avatar');
-        $destinationPath = base_path(). config('settings.user.avatar_path');
-        $fileName = uniqid(time()). '.' . $fileAvatar->getClientOriginalExtension();
+        $destinationPath = config('settings.user.avatar_path');
+        $fileName = uniqid(time()) . '.' . $fileAvatar->getClientOriginalExtension();
         Input::file('avatar')->move($destinationPath, $fileName);
-        if (!empty($oldImage) && file_exists($oldImage)) {
-            File::delete($oldImage);
+        $imageOldDestinationPath = $destinationPath.$oldImage;
+        if (!empty($oldImage) && file_exists($imageOldDestinationPath)) {
+            File::delete($imageOldDestinationPath);
         }
 
         return $fileName;

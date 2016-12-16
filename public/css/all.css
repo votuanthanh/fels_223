@@ -98,6 +98,7 @@ ul.action_admin_with_user,
 
 .profile-user > img {
     max-width: 130px;
+    height: 130px;
     float: left;
 }
 
@@ -111,7 +112,6 @@ ul.action_admin_with_user,
 .profile-user .info-user > h3 {
     margin-top: 5px;
     margin-bottom: 5px;
-    f
 }
 
 .profile-user .info-user ul.info-detail {
@@ -127,4 +127,15 @@ ul.action_admin_with_user,
 
 .loading {
     display: none;
+}
+
+.wrapper-information-user > img {
+    height: 100px;
+    max-width: 100px;
+}
+
+@media only screen and (max-width: 992px) {
+    .secction-category .col-md-2 > a {
+        margin: 0;
+    }
 }

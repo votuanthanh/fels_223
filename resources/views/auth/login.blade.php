@@ -79,13 +79,22 @@
                     <div class="wrapper-social">
                         <div class="row">
                             <div class="col col-md-4">
-                                <a class="btn" href="#"><i class="fa fa-facebook"></i>{{ trans('settings.text.social.google') }}</a>
+                                <a class="btn" href="{{ action('Auth\SocialServiceController@getSocialRedirect', ['provider' => 'google']) }}">
+                                    <i class="fa fa-facebook"></i>
+                                    {{ trans('settings.text.social.google') }}
+                                </a>
                             </div>
                             <div class="col col-md-4">
-                                <a class="btn" href="#"><i class="fa fa-google-plus" aria-hidden="true"></i>{{ trans('settings.text.social.facebook') }}</a>
+                                <a class="btn" href="{{ action('Auth\SocialServiceController@getSocialRedirect', ['provider' => 'facebook']) }}">
+                                <i class="fa fa-google-plus" aria-hidden="true"></i>
+                                {{ trans('settings.text.social.facebook') }}
+                            </a>
                             </div>
                             <div class="col col-md-4">
-                                <a class="btn" href="#"><i class="fa fa-twitter" aria-hidden="true"></i>{{ trans('settings.text.social.twister') }}</a>
+                                <a class="btn" href="{{ action('Auth\SocialServiceController@getSocialRedirect', ['provider' => 'twitter']) }}">
+                                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                                    {{ trans('settings.text.social.twister') }}
+                                </a>
                             </div>
                         </div>
                     </div>

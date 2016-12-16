@@ -8,7 +8,8 @@
 <div class="container">
     <div class="row">
         <div class="col col-md-2 wrapper-information-user">
-            <img src="{{ auth()->user()->avatar }}" width="100" width="100" class="img-responsive">
+            <img src="{{ auth()->user()->avatarPath() }}"
+                width="100" height="100" class="img-responsive">
             <p class="text-center" class="name-user">{{ auth()->user()->name }}</p>
 
             <ul class="list-group">
@@ -36,28 +37,32 @@
                 <div class="panel-heading">{{ trans('settings.text.history_activities') }}</div>
                 <div class="panel-body">
                     <div class="section-history">
-                        @foreach ($datas as $time => $lessons)
-                        <p>
-                            <i class="glyphicon glyphicon-calendar"></i>
-                            {{ $time }}
-                        </p>
-                            <ul>
-                                @foreach($lessons as $lesson)
-                                <li>
-                                    <p>
-                                        <span class="label label-info">
-                                            {{ $lesson->created_at->format('H:i A') }}
-                                        </span>
-                                        <span>{{ trans('settings.text.words_learned_category', [
-                                            'countWordLearned' => $lesson->answers->count(),
-                                            'nameCagory' => $lesson->category->name,
-                                        ]) }}
-                                        </span>
-                                    </p>
-                                </li>
-                                @endforeach
-                            </ul>
-                        @endforeach
+                        @if ($datas)
+                            @foreach ($datas as $time => $lessons)
+                            <p>
+                                <i class="glyphicon glyphicon-calendar"></i>
+                                {{ $time }}
+                            </p>
+                                <ul>
+                                    @foreach($lessons as $lesson)
+                                    <li>
+                                        <p>
+                                            <span class="label label-info">
+                                                {{ $lesson->created_at->format('H:i A') }}
+                                            </span>
+                                            <span>{{ trans('settings.text.words_learned_category', [
+                                                'countLearnedWord' => $lesson->answers->count(),
+                                                'nameCagory' => $lesson->category->name,
+                                            ]) }}
+                                            </span>
+                                        </p>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            @endforeach
+                        @else
+                            <p class="text-info">{{ trans('settings.text.no_activity') }}</p>
+                        @endif
                     </div>
                 </div>
               <!--END BODY PANEL -->

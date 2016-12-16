@@ -63,7 +63,7 @@ class WordRepository extends BaseRepository
             ->whereCategoryId($idCategory)
             ->inRandomOrder()
             ->with('answers')
-            ->take(config('settings.limit_words_random'))
+            ->take(config('settings.word.limit_words_random'))
             ->get();
     }
 
@@ -91,8 +91,45 @@ class WordRepository extends BaseRepository
 
     public function listIdWordLearned()
     {
+        $allLesson = $this->eagerLoadingAnswerCorrect();
+
+        if ($allLesson->isEmpty()) {
+            return [];
+        }
+
+        foreach ($allLesson as $lesson) {
+            foreach ($lesson->answers as $answer) {
+                $idWord[] = $answer->word_id;
+            }
+        }
+
+        return array_unique($idWord);
+    }
+
+    public function countWordCorrectEachCategory()
+    {
+        $lessons = $this->eagerLoadingAnswerCorrect()->load('category');
+
+        if ($lessons->isEmpty()) {
+            return [];
+        }
+
+        foreach ($lessons as $lesson) {
+            $categoryId = $lesson->category->id;
+
+            if (!isset($data[$categoryId])) {
+                $data[$categoryId] = 0;
+            }
+            $data[$categoryId] += $lesson->answers->count();
+        }
+        return $data;
+    }
+
+    public function eagerLoadingAnswerCorrect()
+    {
         $allLesson = $this->getCurrentUser()
             ->lessons()
+            ->orderBy('category_id', 'asc')
             ->whereHas('answers', function ($query) {
                 $query->whereIsCorrect(config('settings.answer.is_correct_answer'));
             })
@@ -100,14 +137,8 @@ class WordRepository extends BaseRepository
             ->load(['answers' => function ($query) {
                 $query->whereIsCorrect(config('settings.answer.is_correct_answer'));
             }]);
-        foreach ($allLesson as $lesson) {
-            foreach ($lesson->answers as $answer) {
-                $idWord[] = $answer->word_id;
-            }
-        }
-        if (empty($idWord)) {
-            return false;
-        }
-        return array_unique($idWord);
+
+        return $allLesson;
     }
+
 }

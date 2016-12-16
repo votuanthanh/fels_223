@@ -17,7 +17,7 @@ class WordTableSeeder extends Seeder
         $categories = Category::all();
 
         foreach ($categories as $category) {
-            for ($i = 0; $i < 6; $i++) {
+            for ($i = 0; $i < 200; $i++) {
                 Word::create([
                     'content' => $faker->word,
                     'category_id' => $category->id,

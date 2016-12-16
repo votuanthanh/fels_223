@@ -24,8 +24,13 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
     Route::post('filter-word', 'Web\FilterController@filterWords');
     Route::get('list-user', 'Web\UserController@index');
     Route::get('ajax-relationship-user/{id}', 'Web\UserController@ajaxRelationshipUser');
+    Route::get('{id}/edit', 'Web\UserController@edit');
+    Route::patch('{id}', 'Web\UserController@update');
 });
 Route::get('/home', 'HomeController@index');
+
+Route::get('/social/redirect/{provider}', 'Auth\SocialServiceController@getSocialRedirect');
+Route::get('/social/handle/{provider}', 'Auth\SocialServiceController@getSocialHandle');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     Route::resource('user', 'Admin\UserController', ['except' => ['store', 'create']]);

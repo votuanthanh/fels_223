@@ -26,7 +26,7 @@ class UserTableSeeder extends Seeder
             User::create([
                 'email' => $faker->email,
                 'name' => $faker->name,
-                'password' => $faker->name . $faker->year,
+                'password' => config('settings.user.default_password_seeder'),
                 'role' => 0,
                 'avatar' => 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png',
             ]);

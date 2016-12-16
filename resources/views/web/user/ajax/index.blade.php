@@ -1,7 +1,7 @@
 @foreach($users as $user)
-    <div class="col col-md-4">
+    <div class="col col-md-6">
         <div class="profile-user">
-            <img src="{{ $user->avatar }}">
+            <img src="{{ $user->avatarPath() }}">
             <div class="info-user" data-url-user= "{{ action('Web\UserController@ajaxRelationshipUser', [
                     'id' => $user->id,
                 ]) }}" >

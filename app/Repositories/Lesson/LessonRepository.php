@@ -23,7 +23,9 @@ class LessonRepository extends BaseRepository
             ->whereUserId($this->getCurrentUser()->id)
             ->orderBy('created_at', 'desc')
             ->get();
-
+        if ($lessons->isEmpty()) {
+            return [];
+        }
         foreach ($lessons as $key => $lesson) {
             $indexTimeFormat = $lesson->created_at->format('Y-m-d');
             if (!isset($data[$indexTimeFormat])) {
@@ -83,7 +85,6 @@ class LessonRepository extends BaseRepository
                     'id_answer_choiced' => $dataResultCurrent->answer_id,
                 ];
                 $dataResultCurrent = next($collectionResult);
-
             }
         }
         return $data;

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ trans('settings.title.register') }}
+    {{ trans('settings.title.admin_user_edit') }}
 @endsection
 
 @section('content')
@@ -9,12 +9,12 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">{{ trans('settings.text.register') }}</div>
+                <div class="panel-heading">{{ trans('settings.text.user.update') }}</div>
                 <div class="panel-body">
-
-                    {!! Form::open([
-                        'action' => 'Auth\RegisterController@register',
-                        'method' => 'POST',
+                    @include('include.status')
+                    {!! Form::model($user, [
+                        'action' => ['Web\UserController@update', $user->id],
+                        'method' => 'PATCH',
                         'class' => 'form-horizontal',
                         'role' => 'form',
                         'files' => true,
@@ -103,7 +103,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                {!! Form::submit(trans('settings.button.register'), ['class' => 'btn btn-primary']) !!}
+                                {!! Form::submit(trans('settings.button.update'), ['class' => 'btn btn-primary']) !!}
                             </div>
                         </div>
                     {!! Form::close() !!}

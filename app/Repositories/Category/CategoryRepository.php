@@ -13,25 +13,21 @@ class CategoryRepository extends BaseRepository
 
     public function getCountCategoriesOfLearned()
     {
-        return $this->getCurrentUser()->categories()->get()->count();
+        return $this->getCurrentUser()->categories()->get()->unique()->count();
     }
 
-    public function getAllCategoriesWithLeanedWords()
+    public function allCategoriesWithCorrectWord($countWordCorrectEachCategory)
     {
-        $categories = $this->model->all()
-            ->load(['answers' => function ($query) {
-                $query->whereIsCorrect(config('settings.answer.is_correct_answer'));
-            }])
-            ->load('words');
-        foreach ($categories as $key => $category) {
-            $data[$key]['category'] = $category;
-            $idWord = [];
-            foreach ($category->answers as $answer) {
-                $idWord[] = $answer->word_id;
-            }
-            $countWordsLearned = count(array_unique($idWord));
-            $data[$key]['countWordsLearned'] = $countWordsLearned;
+        $categories = $this->model->all()->load('words');
+        foreach ($categories as $category) {
+            $data[] = [
+                'category' => $category,
+                'countCorrectWord' => array_key_exists($category->id, $countWordCorrectEachCategory)
+                    ? $countWordCorrectEachCategory[$category->id]
+                    : 0,
+            ];
         }
+
         return $data;
     }
 }

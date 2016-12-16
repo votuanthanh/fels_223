@@ -12,7 +12,7 @@ $(document).ready(function() {
     });
 
     //handle relation ship user
-    $('.action-relationship-user').on('click', function () {
+    $('.section-user').on('click', '.action-relationship-user', function () {
         var $this = $(this);
         var urlAjax = $this.parent().data('url-user');
 

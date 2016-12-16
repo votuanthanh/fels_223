@@ -15,10 +15,15 @@
                     <div class="secction-category">
                         <div class="row">
                             <div class="col col-md-10">
-                                @if ($data['countWordsLearned'] != $data['category']->words->count())
+                                @if ($data['countCorrectWord'] != $data['category']->words->count())
                                     <h4>
                                         <span class="label label-info">{{ $data['category']->name }}</span>
-                                        <span>You have leaned {{ $data['countWordsLearned'] }}/{{ $data['category']->words->count() }}</span>
+                                        <span>
+                                            {{ trans('settings.text.you_have_learned',[
+                                                'number1' => $data['countCorrectWord'],
+                                                'number2' => $data['category']->words->count(),
+                                            ]) }}
+                                        </span>
                                     </h4>
                                     <p><em>{{ $data['category']->description }}</em></p>
                                 @else
@@ -26,7 +31,12 @@
                                         <span class="label label-success">
                                             {{ $data['category']->name }}
                                         </span>
-                                        <span>You have leaned {{ $data['countWordsLearned'] }}/{{ $data['category']->words->count() }}</span>
+                                        <span>
+                                            {{ trans('settings.text.you_have_learned',[
+                                                'number1' => $data['countCorrectWord'],
+                                                'number2' => $data['category']->words->count(),
+                                            ]) }}
+                                        </span>
                                         <span><b>&#9001;completed&#9002;</b></span>
                                     </h4>
                                     <p><em>{{ $data['category']->description }}</em></p>

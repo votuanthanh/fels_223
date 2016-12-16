@@ -2,10 +2,12 @@
 return [
     'user' => [
         'is_admin' => 1,
-        'avatar_path' => '/uploads/user/avatar',
+        'member' => 0,
+        'avatar_path' => public_path() . '/uploads/avatar/',
         'paginate' => 10,
         'default_password_seeder' => '123123',
         'page' => 1,
+        'avatar_default' => 'default-avatar.png',
     ],
     'answer' => [
         'is_correct_answer' => 1,
@@ -22,5 +24,8 @@ return [
     'action' => [
         'add' => 'add',
         'remove' => 'remove',
+    ],
+    'word' => [
+        'limit_words_random' => 20,
     ],
 ];
