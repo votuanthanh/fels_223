@@ -11,6 +11,11 @@ class CategoryRepository extends BaseRepository
         $this->model = $category;
     }
 
+    public function allWithPaginate()
+    {
+        return $this->model->with('words')->paginate(config('settings.user.paginate'));
+    }
+
     public function getCountCategoriesOfLearned()
     {
         return $this->getCurrentUser()->categories()->get()->unique()->count();

@@ -20,10 +20,16 @@ ul.action_admin_with_user,
 .section-history ul {
     list-style: none;
 }
+
 .section-history > p {
     font-size: 16px;
     font-weight: bold;
 }
+
+ul.action_admin_with_user li {
+    display: inline-block;
+}
+
 .section-history .label {
     font-size: 12px;
     margin-right: 8px;

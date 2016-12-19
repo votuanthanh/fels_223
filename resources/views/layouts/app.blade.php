@@ -46,7 +46,7 @@
                     @if(auth()->check())
                         @if (auth()->user()->isAdmin())
                             <ul class="nav navbar-nav menu-header">
-                                <li><a href="">{{ trans('settings.text.manage_categories') }}</a></li>
+                                <li><a href="{{ action('Admin\CategoryController@index') }}">{{ trans('settings.text.manage_categories') }}</a></li>
                                 <li><a href="{{ action('Admin\WordController@index') }}">{{ trans('settings.text.manage_words') }}</a></li>
                                 <li><a href="{{ action('Admin\UserController@index') }}">{{ trans('settings.text.manage_users') }}</a></li>
                             </ul>
