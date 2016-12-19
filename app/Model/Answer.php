@@ -12,4 +12,10 @@ class Answer extends Model
     {
         return $this->belongsTo(Word::class);
     }
+
+    public function isChecked()
+    {
+        return ($this->is_correct == config('settings.answer.is_correct_answer'))
+            ? config('settings.answer.checked') : '';
+    }
 }

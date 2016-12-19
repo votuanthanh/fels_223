@@ -90,6 +90,7 @@ abstract class BaseRepository
                 throw new Exception(trans('message.delete_error'));
             }
             DB::commit();
+            return $data;
         } catch (Exception $e) {
             DB::rollBack();
             throw $e;

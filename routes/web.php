@@ -34,4 +34,5 @@ Route::get('/social/handle/{provider}', 'Auth\SocialServiceController@getSocialH
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     Route::resource('user', 'Admin\UserController', ['except' => ['store', 'create']]);
+    Route::resource('manager-word', 'Admin\WordController');
 });

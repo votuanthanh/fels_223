@@ -17,4 +17,19 @@ class Word extends Model
     {
         return $this->hasMany(Answer::class);
     }
+
+    public function results()
+    {
+        return $this->hasMany(Result::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        //before delete() method call this
+        static::deleting(function ($word) {
+            $word->answers()->delete();
+            $word->results()->delete();
+        });
+    }
 }

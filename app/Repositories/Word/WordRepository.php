@@ -18,6 +18,24 @@ class WordRepository extends BaseRepository
         $this->model = $word;
     }
 
+    public function all()
+    {
+        return $this->model->with('category')->paginate(20);
+    }
+
+    public function createWordWithAnswer($inputWords, $inputAnswers)
+    {
+        if (!$inputWords || !$inputAnswers) {
+            return false;
+        }
+
+        $inputWords['category_id'] = $inputWords['category'];
+        unset($inputWords['category']);
+        return $this->model->create($inputWords)
+            ->answers()
+            ->createMany($inputAnswers);
+    }
+
     public function getLearnedWordWithAllCategory()
     {
         $listIdWordLearned = $this->listIdWordLearned();

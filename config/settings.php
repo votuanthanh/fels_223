@@ -11,6 +11,9 @@ return [
     ],
     'answer' => [
         'is_correct_answer' => 1,
+        'not_correct_answer' => 0,
+        'checked' => 'checked',
+        'number_choice' => 2,
     ],
     'filter' => [
         'all' => 'all',

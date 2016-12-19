@@ -11,6 +11,11 @@ $(document).ready(function() {
         $("#form-delete-user").submit();
     });
 
+    //submit form edit
+    $('.container').on('click', '.action-edit-words', function () {
+        $('.ctz-form').submit();
+    });
+
     //handle relation ship user
     $('.section-user').on('click', '.action-relationship-user', function () {
         var $this = $(this);
@@ -39,6 +44,44 @@ $(document).ready(function() {
                 }
             },
         })
+    });
+
+    //Show model Edit Word + Answer
+    $('.edit-word').click(function () {
+        $this = $(this);
+        var urlAjaxEditWord = $this.data('url-ajax');
+        $.ajax({
+            url: urlAjaxEditWord,
+            type: "get",
+            datatype: "html",
+            success : function (data) {
+               $('#wrapper-model').text('').append(data);
+               $('#word-edit-model').modal('show');
+            },
+        })
+    });
+    //uncheck-other-checkbox-on-one-checked
+    $('.container').on('change', 'input[type=checkbox]', function () {
+        $('input[type=checkbox]').not(this).prop('checked', false);
+    });
+
+    //Apend New Answer For Word
+    var indexAnswer = 1;
+    $('.container').on('click', '#add-answer', function () {
+        var formAddAnswer  = '<div class="form-group">'
+            + '<label for="word" class="col-sm-2 control-label">'
+            + 'Answer </label> <div class="col-sm-10">'
+            + '<input type="text" name="answer[add_new' + indexAnswer + '][content]" class="form-control">'
+            + '<span class="glyphicon glyphicon-trash form-control-feedback delete-answer"></span>'
+            + '<input type="checkbox" name="answer[add_new' + indexAnswer + '][is_correct]" value="1">'
+            + '</div></div>';
+        $(".group-answer").append(formAddAnswer);
+        indexAnswer++;
+    });
+
+    //remove answer
+    $('.container').on('click', '.delete-answer', function () {
+        $(this).closest('.form-group').remove();
     });
 
     //infine for page colletion users

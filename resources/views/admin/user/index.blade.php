@@ -23,7 +23,7 @@
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td><img class="img-responsive" src="{{ $user->avatar }}" width="50" height="50"></td>
+                    <td><img class="img-responsive" src="{{ $user->avatarPath() }}" width="50" height="50"></td>
                     <td>
                         <ul class="action_admin_with_user">
                             <li>
